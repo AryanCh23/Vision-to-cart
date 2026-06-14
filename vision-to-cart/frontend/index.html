@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vision-to-Cart | AI Sunglasses Intelligence</title>
+  <meta name="description" content="Find perfect sunglasses for any scenario — beach, driving, sports, fashion — powered by AI visual search and MCP Intelligence Pipeline." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css?v=4" />
+</head>
+<body>
+
+  <!-- Animated background -->
+  <div class="bg-gradient-orbs">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+  <div class="bg-grid"></div>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="logo">
+        <div class="logo-icon-wrap">
+          <span class="logo-icon">🕶️</span>
+        </div>
+        <div>
+          <span class="logo-text">Vision<span class="accent">to</span>Cart</span>
+          <span class="logo-badge">AI V4</span>
+        </div>
+      </div>
+      <nav class="nav">
+        <a href="#scenarios" class="nav-link">Scenarios</a>
+        <a href="#search" class="nav-link">Search</a>
+        <a href="#results" class="nav-link">Results</a>
+        <a href="#how-it-works" class="nav-link">How It Works</a>
+        <span class="nav-status" id="serverStatus">
+          <span class="status-dot"></span> MCP Active
+        </span>
+      </nav>
+      <button class="cart-btn" id="cartBtn" onclick="toggleCart()">
+        <span class="cart-icon">🛒</span>
+        <span class="cart-count" id="cartCount">0</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <div class="hero-eyebrow">
+        <span class="eyebrow-dot"></span>
+        Powered by MCP Intelligence Pipeline
+        <span class="eyebrow-dot"></span>
+      </div>
+      <h1 class="hero-title">
+        Find Your Perfect<br/>
+        <span class="gradient-text">Sunglasses with AI</span>
+      </h1>
+      <p class="hero-sub">
+        Upload a photo or describe your style — our AI matches you to the ideal eyewear across 40+ premium sunglasses for every scenario imaginable.
+      </p>
+      <div class="hero-stats">
+        <div class="stat-item"><span class="stat-number">40+</span><span class="stat-label">Sunglasses</span></div>
+        <div class="stat-divider"></div>
+        <div class="stat-item"><span class="stat-number">10</span><span class="stat-label">Scenarios</span></div>
+        <div class="stat-divider"></div>
+        <div class="stat-item"><span class="stat-number">5-Stage</span><span class="stat-label">AI Pipeline</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Scenario Browser -->
+  <section class="scenarios-section" id="scenarios">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Browse by <span class="gradient-text">Scenario</span></h2>
+        <p class="section-sub">Tap a scenario to instantly discover sunglasses curated for that moment</p>
+      </div>
+      <div class="scenarios-grid" id="scenariosGrid">
+        <div class="scenario-card" id="sc-beach" onclick="searchScenario('beach', '☀️')">
+          <div class="scenario-icon-wrap" style="--sc-color:#f59e0b">☀️</div>
+          <div class="scenario-info">
+            <div class="scenario-name">Beach & Summer</div>
+            <div class="scenario-desc">UV400 polarized, glare-free</div>
+          </div>
+          <div class="scenario-count">8 styles</div>
+        </div>
+        <div class="scenario-card" id="sc-driving" onclick="searchScenario('driving', '🚗')">
+          <div class="scenario-icon-wrap" style="--sc-color:#3b82f6">🚗</div>
+          <div class="scenario-info">
+            <div class="scenario-name">Driving</div>
+            <div class="scenario-desc">Anti-glare, polarized lenses</div>
+          </div>
+          <div class="scenario-count">6 styles</div>
+        </div>
+        <div class="scenario-card" id="sc-sports" onclick="searchScenario('sports', '🏃')">
+          <div class="scenario-icon-wrap" style="--sc-color:#10b981">🏃</div>
+          <div class="scenario-info">
+            <div class="scenario-name">Sports & Active</div>
+            <div class="scenario-desc">Wraparound, impact resistant</div>
+          </div>
+          <div class="scenario-count">9 styles</div>
+        </div>
+        <div class="scenario-card" id="sc-fashion" onclick="searchScenario('fashion', '👗')">
+          <div class="scenario-icon-wrap" style="--sc-color:#ec4899">👗</div>
+          <div class="scenario-info">
+            <div class="scenario-name">Fashion & Events</div>
+            <div class="scenario-desc">Luxury brands, statement looks</div>
+          </div>
+          <div class="scenario-count">12 styles</div>
+        </div>
+        <div class="scenario-card" id="sc-office" onclick="searchScenario('office', '💼')">
+          <div class="scenario-icon-wrap" style="--sc-color:#6366f1">💼</div>
+          <div class="scenario-info">
+            <div class="scenario-name">Office & Professional</div>
+            <div class="scenario-desc">Subtle, refined classics</div>
+          </div>
+          <div class="scenario-count">7 styles</div>
+        </div>
+        <div class="scenario-card" id="sc-outdoor" onclick="searchScenario('outdoor', '⛰️')">
+          <div class="scenario-icon-wrap" style="--sc-color:#16a34a">⛰️</div>
+          <div class="scenario-info">
+            <div class="scenario-name">Outdoor & Hiking</div>
+            <div class="scenario-desc">Full coverage, high altitude UV</div>
+          </div>
+          <div class="scenario-count">6 styles</div>
+        </div>
+        <div class="scenario-card" id="sc-festival" onclick="searchScenario('festival', '🎪')">
+          <div class="scenario-icon-wrap" style="--sc-color:#8b5cf6">🎪</div>
+          <div class="scenario-info">
+            <div class="scenario-name">Festival & Party</div>
+            <div class="scenario-desc">Bold tints, statement frames</div>
+          </div>
+          <div class="scenario-count">7 styles</div>
+        </div>
+        <div class="scenario-card" id="sc-travel" onclick="searchScenario('travel', '✈️')">
+          <div class="scenario-icon-wrap" style="--sc-color:#0ea5e9">✈️</div>
+          <div class="scenario-info">
+            <div class="scenario-name">Travel & Vacation</div>
+            <div class="scenario-desc">Versatile, lightweight, packable</div>
+          </div>
+          <div class="scenario-count">8 styles</div>
+        </div>
+        <div class="scenario-card" id="sc-luxury" onclick="searchScenario('luxury', '💎')">
+          <div class="scenario-icon-wrap" style="--sc-color:#f59e0b">💎</div>
+          <div class="scenario-info">
+            <div class="scenario-name">Luxury & Premium</div>
+            <div class="scenario-desc">Cartier, Gucci, Tom Ford</div>
+          </div>
+          <div class="scenario-count">10 styles</div>
+        </div>
+        <div class="scenario-card" id="sc-everyday" onclick="searchScenario('everyday', '🌤️')">
+          <div class="scenario-icon-wrap" style="--sc-color:#94a3b8">🌤️</div>
+          <div class="scenario-info">
+            <div class="scenario-name">Everyday Wear</div>
+            <div class="scenario-desc">Casual, comfortable classics</div>
+          </div>
+          <div class="scenario-count">11 styles</div>
+        </div>
+        <div class="scenario-card" id="sc-water" onclick="searchScenario('water', '🏄')">
+          <div class="scenario-icon-wrap" style="--sc-color:#06b6d4">🏄</div>
+          <div class="scenario-info">
+            <div class="scenario-name">Water Sports</div>
+            <div class="scenario-desc">Marine-grade, floating frames</div>
+          </div>
+          <div class="scenario-count">5 styles</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Search Section -->
+  <section class="search-section" id="search">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">AI-Powered <span class="gradient-text">Search</span></h2>
+        <p class="section-sub">Describe what you want or upload an image — our 5-stage pipeline does the rest</p>
+      </div>
+
+      <div class="search-card" id="searchCard">
+        <!-- Mode Tabs -->
+        <div class="mode-tabs">
+          <button class="mode-tab active" id="tabText" onclick="switchMode('text')">
+            <span class="tab-icon">💬</span> Text Search
+          </button>
+          <button class="mode-tab" id="tabImage" onclick="switchMode('image')">
+            <span class="tab-icon">📷</span> Image Search
+          </button>
+        </div>
+
+        <!-- Text Mode -->
+        <div class="mode-panel" id="panelText">
+          <div class="input-wrap">
+            <textarea
+              id="textQuery"
+              class="query-input"
+              placeholder="e.g. I want sunglasses like James Bond wore in Skyfall, or aviators for beach vacation with polarized lenses..."
+              rows="3"
+            ></textarea>
+            <div class="input-char-hint" id="charHint">Describe style, occasion, color, brand...</div>
+          </div>
+          <div class="quick-queries">
+            <span class="quick-label">Quick picks:</span>
+            <button class="quick-btn" onclick="setQuery('Aviator sunglasses gold frame like Top Gun for beach')">☀️ Top Gun Beach</button>
+            <button class="quick-btn" onclick="setQuery('Polarized driving sunglasses premium titanium')">🚗 Driving</button>
+            <button class="quick-btn" onclick="setQuery('Oakley sport sunglasses for cycling wraparound')">🚴 Cycling</button>
+            <button class="quick-btn" onclick="setQuery('Luxury cat-eye sunglasses for fashion event Gucci')">💃 Fashion Event</button>
+            <button class="quick-btn" onclick="setQuery('Budget casual everyday sunglasses under 2000')">💰 Budget Daily</button>
+            <button class="quick-btn" onclick="setQuery('James Bond Skyfall black sunglasses Tom Ford')">🕵️ James Bond</button>
+            <button class="quick-btn" onclick="setQuery('Priyanka Chopra luxury fashion sunglasses Gucci cat-eye')">⭐ Priyanka Style</button>
+            <button class="quick-btn" onclick="setQuery('Water sports surfing marine grade polarized sunglasses')">🏄 Water Sports</button>
+            <button class="quick-btn" onclick="setQuery('Lightweight packable travel vacation resort sunglasses')">✈️ Travel Pack</button>
+            <button class="quick-btn" onclick="setQuery('High-end luxury premium craft statement eyewear Cartier')">💎 Ultra Luxury</button>
+          </div>
+        </div>
+
+        <!-- Image Mode -->
+        <div class="mode-panel hidden" id="panelImage">
+          <div class="upload-zone" id="uploadZone" onclick="document.getElementById('fileInput').click()" ondragover="handleDragOver(event)" ondrop="handleDrop(event)">
+            <div class="upload-icon-large">📸</div>
+            <p class="upload-primary">Drop your image here</p>
+            <p class="upload-secondary">or <span class="upload-link">browse files</span></p>
+            <p class="upload-hint">JPG, PNG, WEBP · Max 10MB</p>
+            <input type="file" id="fileInput" accept="image/*" style="display:none" onchange="handleFileSelect(event)" />
+          </div>
+          <div class="image-preview hidden" id="imagePreview">
+            <img id="previewImg" src="" alt="Preview" />
+            <button class="remove-img-btn" onclick="clearImage()">✕ Remove</button>
+          </div>
+        </div>
+
+        <!-- Filters Row -->
+        <div class="filters-row" id="filtersRow">
+          <div class="filter-group">
+            <label class="filter-label">Budget</label>
+            <select class="filter-select" id="filterBudget">
+              <option value="">Any price</option>
+              <option value="budget">Under ₹2,000</option>
+              <option value="mid">₹2,000–₹10,000</option>
+              <option value="premium">₹10,000–₹25,000</option>
+              <option value="luxury">₹25,000+</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <label class="filter-label">Brand</label>
+            <select class="filter-select" id="filterBrand">
+              <option value="">All brands</option>
+              <option value="Ray-Ban">Ray-Ban</option>
+              <option value="Oakley">Oakley</option>
+              <option value="Gucci">Gucci</option>
+              <option value="Prada">Prada</option>
+              <option value="Maui Jim">Maui Jim</option>
+              <option value="Tom Ford">Tom Ford</option>
+              <option value="Cartier">Cartier</option>
+              <option value="Fastrack">Fastrack</option>
+              <option value="Lenskart">Lenskart</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <label class="filter-label">Gender</label>
+            <select class="filter-select" id="filterGender">
+              <option value="">All</option>
+              <option value="male">Men</option>
+              <option value="female">Women</option>
+              <option value="unisex">Unisex</option>
+            </select>
+          </div>
+          <div class="filter-group filter-toggle">
+            <label class="filter-label">Polarized only</label>
+            <label class="toggle-switch">
+              <input type="checkbox" id="filterPolarized" />
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Search footer -->
+        <div class="search-footer">
+          <div class="session-info">
+            <span class="session-label">Session:</span>
+            <code class="session-id" id="sessionIdDisplay">—</code>
+            <button class="btn-icon" onclick="newSession()" title="New Session">🔄</button>
+          </div>
+          <button class="btn-search" id="searchBtn" onclick="runSearch()">
+            <span class="search-btn-icon">🔍</span>
+            <span>Search with AI</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pipeline Progress -->
+  <section class="pipeline-section hidden" id="pipelineSection">
+    <div class="container">
+      <h2 class="section-title">🧠 AI Pipeline <span class="gradient-text">Processing</span></h2>
+      <div class="pipeline-track" id="pipelineTrack"></div>
+    </div>
+  </section>
+
+  <!-- Results Section -->
+  <section class="results-section hidden" id="resultsSection">
+    <div class="container">
+
+      <!-- Style DNA Card -->
+      <div class="dna-card" id="dnaCard">
+        <div class="dna-left">
+          <div class="dna-icon">🧬</div>
+          <div>
+            <div class="dna-title">Style DNA Detected</div>
+            <div class="dna-tags" id="dnaTags"></div>
+          </div>
+        </div>
+        <div class="dna-right">
+          <span class="confidence-badge" id="confidenceBadge">High</span>
+          <p class="governance-msg" id="governanceMsg"></p>
+        </div>
+      </div>
+
+      <!-- Results Header + Sort -->
+      <div class="results-header">
+        <h2 class="section-title" id="resultsTitle">Top Matches</h2>
+        <div class="sort-row">
+          <label class="sort-label">Sort by:</label>
+          <select class="sort-select" id="sortSelect" onchange="sortResults()">
+            <option value="relevance">Best Match</option>
+            <option value="price-asc">Price: Low to High</option>
+            <option value="price-desc">Price: High to Low</option>
+            <option value="rating">Top Rated</option>
+            <option value="popular">Most Popular</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Product Matches Grid -->
+      <div class="products-grid" id="productsGrid"></div>
+
+      <!-- Recommendations -->
+      <div class="recs-section" id="recsSection">
+        <h2 class="section-title">💡 Alternative <span class="gradient-text">Picks</span></h2>
+        <div class="recs-grid">
+          <div class="rec-column">
+            <div class="rec-col-header budget">
+              <span>💰</span> Budget Picks
+            </div>
+            <div class="rec-list" id="recBudget"></div>
+          </div>
+          <div class="rec-column">
+            <div class="rec-col-header premium">
+              <span>💎</span> Premium Picks
+            </div>
+            <div class="rec-list" id="recPremium"></div>
+          </div>
+          <div class="rec-column">
+            <div class="rec-col-header trending">
+              <span>🔥</span> Trending Now
+            </div>
+            <div class="rec-list" id="recTrending"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Refine query -->
+      <div class="refine-bar">
+        <span class="refine-icon">✨</span>
+        <input type="text" id="refineInput" class="refine-input" placeholder="Refine: make it cheaper · prefer polarized · show me blue lenses..." />
+        <button class="btn-refine" onclick="runRefine()">Refine</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section class="how-section" id="how-it-works">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">⚙️ How <span class="gradient-text">It Works</span></h2>
+        <p class="section-sub">5-stage MCP Intelligence Pipeline processes every request in real-time</p>
+      </div>
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-num">01</div>
+          <div class="step-icon-lg">🖼️</div>
+          <h3>Input Understanding</h3>
+          <p>YOLOv8 object detection for images + GPT-4o Vision. NL intent parser for text queries extracts shape, brand, color preferences.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-num">02</div>
+          <div class="step-icon-lg">🧬</div>
+          <h3>Style DNA Extraction</h3>
+          <p>Converts input to structured StyleDNA: shape, frame color, lens color, material, gender, price tier, scenario tags.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-num">03</div>
+          <div class="step-icon-lg">🔍</div>
+          <h3>Hybrid Vector Search</h3>
+          <p>ChromaDB semantic search + keyword filtering over 40+ products with sentence-transformer embeddings.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-num">04</div>
+          <div class="step-icon-lg">📊</div>
+          <h3>5-Component Scoring</h3>
+          <p>Re-ranks by shape match, color similarity, brand affinity, trend score & price alignment. Scenario-aware boosting.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-num">05</div>
+          <div class="step-icon-lg">🎯</div>
+          <h3>Confidence Governance</h3>
+          <p>Routes to High / Medium / Low confidence with tailored recommendations, budget alternatives and scenario suggestions.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <span class="footer-logo">🕶️ Vision<span style="color:var(--accent-1)">to</span>Cart</span>
+          <p>AI-powered sunglasses discovery for every moment and scenario.</p>
+        </div>
+        <div class="footer-links">
+          <span>MCP Commerce Intelligence Hackathon</span>
+          <span>Built with FastAPI + ChromaDB + YOLOv8</span>
+          <span>© 2025</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Cart Sidebar -->
+  <div class="cart-overlay hidden" id="cartOverlay" onclick="toggleCart()"></div>
+  <div class="cart-sidebar hidden" id="cartSidebar">
+    <div class="cart-header">
+      <h3>🛒 Your Cart</h3>
+      <button class="cart-close" onclick="toggleCart()">✕</button>
+    </div>
+    
+    <!-- Shipping Progress Bar -->
+    <div class="shipping-progress-container" id="shippingProgressContainer">
+      <div class="shipping-progress-text" id="shippingProgressText">Add items to qualify for Free Shipping!</div>
+      <div class="shipping-progress-bar-wrap">
+        <div class="shipping-progress-bar" id="shippingProgressBar" style="width: 0%"></div>
+      </div>
+    </div>
+
+    <div class="cart-items" id="cartItems">
+      <div class="cart-empty">
+        <div class="cart-empty-icon">🕶️</div>
+        <p>Your cart is empty</p>
+        <p class="cart-empty-sub">Start searching to add sunglasses</p>
+      </div>
+    </div>
+    
+    <div class="cart-footer hidden" id="cartFooter">
+      <!-- Promo code container -->
+      <div class="cart-promo-section">
+        <input type="text" id="cartPromoInput" class="cart-promo-input" placeholder="Promo code (e.g. HACKATHON)" />
+        <button class="btn-apply-promo" onclick="applyPromoCode()">Apply</button>
+      </div>
+      <div id="cartPromoMessage" class="cart-promo-message"></div>
+
+      <div class="cart-summary-lines">
+        <div class="cart-summary-line">
+          <span>Subtotal</span>
+          <span id="cartSubtotal">₹0</span>
+        </div>
+        <div class="cart-summary-line discount hidden" id="cartDiscountRow">
+          <span>Discount (10%)</span>
+          <span id="cartDiscount">-₹0</span>
+        </div>
+        <div class="cart-summary-line">
+          <span>Shipping</span>
+          <span id="cartShipping">₹150</span>
+        </div>
+      </div>
+
+      <div class="cart-total">
+        <span>Total</span>
+        <span id="cartTotal">₹0</span>
+      </div>
+      <button class="btn-checkout" onclick="checkout()">Proceed to Checkout →</button>
+      <div class="checkout-trust-badge">🔒 MCP Secure 256-bit Checkout</div>
+    </div>
+  </div>
+
+  <!-- Product Detail Modal -->
+  <div class="modal-overlay hidden" id="modalOverlay" onclick="closeModal()">
+    <div class="product-modal" id="productModal" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="closeModal()">✕</button>
+      <div class="modal-content" id="modalContent"></div>
+    </div>
+  </div>
+
+  <script src="app.js?v=4"></script>
+</body>
+</html>
+

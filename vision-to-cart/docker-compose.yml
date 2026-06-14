@@ -1,0 +1,117 @@
+# ============================================================
+# Vision-to-Cart V4 — Full Docker Compose Stack
+# ============================================================
+# Services:
+#   mcp-server    → FastAPI MCP pipeline server (port 8000)
+#   frontend      → Static nginx server for the web UI (port 3000)
+#   redis         → Session store & caching (port 6379)
+#   chromadb      → Vector database server (port 8001)
+#   elasticsearch → Optional keyword search index (port 9200)
+# ============================================================
+
+services:
+
+  # ── 1. MCP API Server ──────────────────────────────────────
+  mcp-server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: vision_cart_api
+    ports:
+      - "8000:8000"
+    environment:
+      - PORT=8000
+      - HOST=0.0.0.0
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - CHROMADB_PERSIST_DIR=/app/data_services/vector_store
+      - CATALOG_PATH=/app/data_services/catalog/catalog.json
+      - ENRICHED_CATALOG_PATH=/app/data_services/catalog/catalog_enriched.json
+      # Optional — add real keys via .env file
+      - OPENAI_API_KEY=${OPENAI_API_KEY:-}
+      - GEMINI_API_KEY=${GEMINI_API_KEY:-}
+      - TAVILY_API_KEY=${TAVILY_API_KEY:-}
+    env_file:
+      - .env
+    volumes:
+      # Persist vector store between restarts
+      - vector_data:/app/data_services/vector_store
+      # Mount catalog so you can update products without rebuilding
+      - ./data_services/catalog:/app/data_services/catalog:ro
+    depends_on:
+      redis:
+        condition: service_healthy
+    networks:
+      - vision_network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
+
+  # ── 2. Frontend (Static Nginx) ─────────────────────────────
+  frontend:
+    image: nginx:alpine
+    container_name: vision_cart_frontend
+    ports:
+      - "3000:80"
+    volumes:
+      - ./frontend:/usr/share/nginx/html:ro
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - mcp-server
+    networks:
+      - vision_network
+    restart: unless-stopped
+
+  # ── 3. Redis (Session Cache) ───────────────────────────────
+  redis:
+    image: redis:7-alpine
+    container_name: vision_cart_redis
+    ports:
+      - "6379:6379"
+    command: redis-server --appendonly yes --maxmemory 256mb --maxmemory-policy allkeys-lru
+    volumes:
+      - redis_data:/data
+    networks:
+      - vision_network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ── 4. Elasticsearch (Optional keyword search) ─────────────
+  elasticsearch:
+    image: elasticsearch:8.11.1
+    container_name: vision_cart_elasticsearch
+    profiles:
+      - full   # Only starts with: docker compose --profile full up
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - "ES_JAVA_OPTS=-Xms256m -Xmx512m"
+    ports:
+      - "9200:9200"
+    volumes:
+      - es_data:/usr/share/elasticsearch/data
+    networks:
+      - vision_network
+    restart: unless-stopped
+
+# ── Volumes ────────────────────────────────────────────────
+volumes:
+  redis_data:
+    driver: local
+  vector_data:
+    driver: local
+  es_data:
+    driver: local
+
+# ── Network ────────────────────────────────────────────────
+networks:
+  vision_network:
+    driver: bridge

@@ -1,0 +1,57 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Virtual envs
+.venv/
+venv/
+env/
+ENV/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log
+*.log.*
+
+# Docker
+Dockerfile*
+docker-compose*.yml
+.dockerignore
+
+# Test & temp files
+test_output.log
+pip_install.log
+pip_ver.log
+test_ver_pg.log
+
+# Environment secrets
+.env
+*.env.local
+
+# Large generated files
+data_services/vector_store/
+data_services/embeddings_cache/
+
+# Git
+.git/
+.gitignore
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Batch files (not needed in container)
+*.bat

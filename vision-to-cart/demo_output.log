@@ -1,0 +1,184 @@
+Failed to find real location of C:\Program Files\PostgreSQL\16\pgAdmin 4\python\python.exe
+==================================================
+Vision-to-Cart V4 Scaffolding Demo Test Suite
+==================================================
+Initializing in-memory database...
+ProductIntelligence: sentence-transformers not available (No module named 'sentence_transformers'). Using simulated word-match embeddings.
+ProductIntelligence: chromadb not available (No module named 'chromadb'). Using local memory collection fallback.
+--------------------------------------------------
+Vision-to-Cart: Starting Catalog Ingestion Script
+--------------------------------------------------
+CatalogIntelligenceTool: Loading raw catalog from C:\Users\Admin\Documents\Hackthon_Project\vision-to-cart\data_services\catalog\catalog.json...
+CatalogIntelligenceTool: Applying taxonomy classification rules...
+CatalogIntelligenceTool: Saved enriched products to C:\Users\Admin\Documents\Hackthon_Project\vision-to-cart\data_services\catalog\catalog_enriched.json
+CatalogIntelligenceTool: Generating embeddings and loading into Vector DB...
+ProductIntelligence: Pre-loaded 31 products from catalog cache.
+ProductIntelligence: Kept 31 products in-memory.
+Ingestion execution completed.
+Status: success
+Products Processed: 31
+Vector Store Populated: True
+--------------------------------------------------
+
+============================================================
+DEMO SCENARIO: Natural Language Celebrity Search (Daniel Craig Skyfall)
+============================================================
+Connecting to pipeline stream...
+ [RUNNING] Initializing pipeline workflow...
+ [RUNNING] Analyzing NL Intent & Context...
+ [RUNNING] Executing NL Understanding (Intent Schema + Web Evidence)...
+NLUnderstandingTool: Analyzing query 'I want to buy the sunglasses Daniel Craig wore in Skyfall. Black frame preferred.'...
+NLUnderstandingTool: Extracted Intent -> {'celebrity_name': 'Daniel Craig', 'movie_name': 'Skyfall', 'product_type': 'sunglasses', 'style_descriptors': ['classic', 'luxury'], 'gender_preference': 'unisex', 'color_preference': 'black'}
+NLUnderstandingTool: Querying Brave/Tavily for 'Daniel Craig Skyfall sunglasses'...
+NLUnderstandingTool: Gathered 3 pieces of web evidence.
+ [SUCCESS] NL understanding completed
+   -> DNA: {'shape': 'square', 'frame_color': 'black', 'lens_color': 'black', 'frame_material': None, 'gender': 'unisex', 'style_tags': ['classic', 'luxury'], 'brand_hint': None, 'price_range_preference': None, 'confidence_score': 0.9, 'source': 'nl'}
+ [RUNNING] Performing Hybrid Database Retrieval (Vector + Keywords)...
+SearchRetrievalTool: Combined search text -> 'black square sunglasses with black lenses featuring a classic, luxury style'
+ProductIntelligence: Pre-loaded 31 products from catalog cache.
+SearchRetrievalTool: Vector search retrieved 20 raw matches.
+SearchRetrievalTool: Returning 10 filtered candidates.
+ [SUCCESS] Retrieved 10 candidate products
+ [RUNNING] Executing 5-Component Scoring & Relevance Check...
+ [SUCCESS] Scoring & validation completed
+ [RUNNING] Running Confidence Governance Routing...
+ [SUCCESS] Confidence routing applied
+ [RUNNING] Generating Budget & Premium Recommendations...
+ [SUCCESS] Recommendations generated
+[METRIC] pipelines_completed incremented by 1. Current total: 1
+
+ [RESULT READY] Workflow pipeline execution completed
+   Confidence: Medium (Found matching products from our catalog.)
+
+   Top Product Matches:
+     1. Wayfarer Stealth Black (Ray-Ban) - Price: Rs. 6800
+        Reason: Matched because: square shape — Confidence Score: 61%
+     2. Wooden Horizon Wayfarer (Shwood) - Price: Rs. 12500
+        Reason: Matched because: square shape — Confidence Score: 55%
+     3. Budget Rectangle Slate (Fastrack) - Price: Rs. 1800
+        Reason: Matched because: black lenses — Confidence Score: 50%
+
+   Recommendations Alternatives:
+     Budget Options: 
+     Premium Options: 
+     Trending Options: 
+
+============================================================
+DEMO SCENARIO: Image-Based Visual Search (Gold Aviator Photo)
+============================================================
+Connecting to pipeline stream...
+ [RUNNING] Initializing pipeline workflow...
+ [RUNNING] Processing Image Intelligence (YOLOv8 + GPT-4o Vision)...
+ImageIntelligenceTool: Decoding base64 image...
+Warning: Failed to decode base64 image (cannot identify image file <_io.BytesIO object at 0x000001A4204C6B10>). Using dummy image fallback.
+ImageIntelligenceTool: Running YOLOv8 eyewear object detection...
+ImageIntelligenceTool: No API Key found. Using attribute matching heuristics.
+ImageIntelligenceTool: Normalized StyleDNA -> {'shape': 'aviator', 'frame_color': 'gold', 'lens_color': 'green', 'frame_material': 'metal', 'gender': 'unisex', 'style_tags': ['classic', 'luxury'], 'brand_hint': 'Ray-Ban', 'price_range_preference': None, 'confidence_score': 0.9, 'source': 'image'}
+ [SUCCESS] Image analyzed successfully
+ [RUNNING] Performing Hybrid Database Retrieval (Vector + Keywords)...
+SearchRetrievalTool: Combined search text -> 'metal gold aviator sunglasses with green lenses by Ray-Ban featuring a classic, luxury style'
+ProductIntelligence: Pre-loaded 31 products from catalog cache.
+SearchRetrievalTool: Vector search retrieved 20 raw matches.
+SearchRetrievalTool: Returning 10 filtered candidates.
+ [SUCCESS] Retrieved 10 candidate products
+ [RUNNING] Executing 5-Component Scoring & Relevance Check...
+ [SUCCESS] Scoring & validation completed
+ [RUNNING] Running Confidence Governance Routing...
+ [SUCCESS] Confidence routing applied
+ [RUNNING] Generating Budget & Premium Recommendations...
+ [SUCCESS] Recommendations generated
+[METRIC] pipelines_completed incremented by 1. Current total: 2
+
+ [RESULT READY] Workflow pipeline execution completed
+   Confidence: High (Found matching products from our catalog.)
+
+   Top Product Matches:
+     1. Classic Gold Aviator (Ray-Ban) - Price: Rs. 7500
+        Reason: Matched because: aviator shape, green lenses, brand Ray-Ban, matching style aesthetics — Confidence Score: 83%
+     2. Clubmaster Classic (Ray-Ban) - Price: Rs. 8900
+        Reason: Matched because: green lenses, brand Ray-Ban — Confidence Score: 50%
+     3. Titanium Premium Aviator (Maui Jim) - Price: Rs. 21000
+        Reason: Matched because: aviator shape — Confidence Score: 42%
+
+   Recommendations Alternatives:
+     Budget Options: 
+     Premium Options: 
+     Trending Options: 
+
+============================================================
+DEMO SCENARIO: NL Sport Query (Initial)
+============================================================
+Connecting to pipeline stream...
+ [RUNNING] Initializing pipeline workflow...
+ [RUNNING] Analyzing NL Intent & Context...
+ [RUNNING] Executing NL Understanding (Intent Schema + Web Evidence)...
+NLUnderstandingTool: Analyzing query 'show me some Oakley sunglasses with blue lenses for sport.'...
+NLUnderstandingTool: Extracted Intent -> {'product_type': 'sunglasses', 'gender_preference': 'unisex', 'color_preference': 'blue', 'shape_preference': 'sport', 'brand_hint': 'Oakley'}
+ [SUCCESS] NL understanding completed
+   -> DNA: {'shape': 'sport', 'frame_color': 'blue', 'lens_color': 'blue', 'frame_material': None, 'gender': 'unisex', 'style_tags': [], 'brand_hint': 'Oakley', 'price_range_preference': None, 'confidence_score': 0.75, 'source': 'nl'}
+ [RUNNING] Performing Hybrid Database Retrieval (Vector + Keywords)...
+SearchRetrievalTool: Combined search text -> 'blue sport sunglasses with blue lenses by Oakley'
+ProductIntelligence: Pre-loaded 31 products from catalog cache.
+SearchRetrievalTool: Vector search retrieved 20 raw matches.
+SearchRetrievalTool: Returning 10 filtered candidates.
+ [SUCCESS] Retrieved 10 candidate products
+ [RUNNING] Executing 5-Component Scoring & Relevance Check...
+ [SUCCESS] Scoring & validation completed
+ [RUNNING] Running Confidence Governance Routing...
+ [SUCCESS] Confidence routing applied
+ [RUNNING] Generating Budget & Premium Recommendations...
+ [SUCCESS] Recommendations generated
+[METRIC] pipelines_completed incremented by 1. Current total: 3
+
+ [RESULT READY] Workflow pipeline execution completed
+   Confidence: Medium (Found matching products from our catalog.)
+
+   Top Product Matches:
+     1. Budget Active Sport (Decathlon) - Price: Rs. 1200
+        Reason: Matched because: sport shape, blue lenses — Confidence Score: 50%
+     2. Radar EV Path Sport (Oakley) - Price: Rs. 14500
+        Reason: Matched because: sport shape, brand Oakley — Confidence Score: 46%
+     3. Sutro Shield Glasses (Oakley) - Price: Rs. 12500
+        Reason: Matched because: sport shape, brand Oakley — Confidence Score: 45%
+
+   Recommendations Alternatives:
+     Budget Options: 
+     Premium Options: 
+     Trending Options: 
+
+============================================================
+DEMO SCENARIO: NL Sport Query (Refinement Flow)
+============================================================
+Connecting to pipeline stream...
+ [RUNNING] Initializing pipeline workflow...
+ [RUNNING] Analyzing NL Intent & Context...
+ [RUNNING] Executing NL Understanding (Intent Schema + Web Evidence)...
+NLUnderstandingTool: Analyzing query 'make it cheaper or budget version. (context refinement based on previously viewed: brand Oakley, blue frame, sport shape, blue lenses)'...
+NLUnderstandingTool: Extracted Intent -> {'product_type': 'sunglasses', 'gender_preference': 'male', 'color_preference': 'blue', 'shape_preference': 'sport', 'brand_hint': 'Oakley', 'price_refinement': 'budget'}
+ [SUCCESS] NL understanding completed
+   -> DNA: {'shape': 'sport', 'frame_color': 'blue', 'lens_color': 'blue', 'frame_material': None, 'gender': 'male', 'style_tags': [], 'brand_hint': 'Oakley', 'price_range_preference': 'budget', 'confidence_score': 0.75, 'source': 'nl'}
+ [RUNNING] Performing Hybrid Database Retrieval (Vector + Keywords)...
+SearchRetrievalTool: Combined search text -> 'male's blue sport sunglasses with blue lenses by Oakley in the budget price tier'
+ProductIntelligence: Pre-loaded 31 products from catalog cache.
+SearchRetrievalTool: Vector search retrieved 20 raw matches.
+SearchRetrievalTool: Returning 1 filtered candidates.
+ [SUCCESS] Retrieved 1 candidate products
+ [RUNNING] Executing 5-Component Scoring & Relevance Check...
+ [SUCCESS] Scoring & validation completed
+ [RUNNING] Running Confidence Governance Routing...
+ [SUCCESS] Confidence routing applied
+ [RUNNING] Generating Budget & Premium Recommendations...
+ [SUCCESS] Recommendations generated
+[METRIC] pipelines_completed incremented by 1. Current total: 4
+
+ [RESULT READY] Workflow pipeline execution completed
+   Confidence: Low (We couldn't find an exact match, but here are some alternatives you might like:)
+
+   Top Product Matches:
+     1. Budget Active Sport (Decathlon) - Price: Rs. 1200
+        Reason: Matched because: sport shape, blue lenses — Confidence Score: 47%
+
+   Recommendations Alternatives:
+     Budget Options: 
+     Premium Options: 
+     Trending Options: 

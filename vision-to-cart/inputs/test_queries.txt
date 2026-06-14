@@ -1,0 +1,25 @@
+Scenario 1: Celebrity Style Reference
+Query: "I want to buy the sunglasses Daniel Craig wore in Skyfall. Black frame preferred."
+Expected matching products: Ray-Ban Wayfarer (P002) or Gucci Cat-Eye/Square (P011, P013)
+Explainability: Matches based on web search evidence pointing to Tom Ford Snowdon (black acetate square frame).
+
+Scenario 2: Event Fashion Reference
+Query: "Give me some gold metal aviator sunglasses similar to the classic Cannes festival look."
+Expected matching products: Classic Gold Aviator (P001) or Titanium Premium Aviator (P022)
+Explainability: Exact match for shape (aviator), color (gold), and material (metal).
+
+Scenario 3: Vague Aesthetic description
+Query: "Looking for retro round glasses in clear acetate."
+Expected matching products: Erika Velvet Round (P005), Budget Round Casual (P019)
+Explainability: Matches retro/classic tags and round shape, with transparent/clear frame color.
+
+Scenario 4: Budget Refinement Flow
+First Query: "show me some Oakley sunglasses with blue lenses for sport."
+Refined Query: "make it cheaper or budget version."
+Expected matching products: Oakley Holbrook (P007) -> Budget Active Sport (P018)
+Explainability: Refinement is merged with context. Top recommendation becomes P018 (price ₹1,200).
+
+Scenario 5: Multi-attribute Filter
+Query: "I need premium titanium aviators by Ray-Ban with gray lenses."
+Expected matching products: Rectangular Titanium Gray (P029), Titanium Premium Aviator (P022)
+Explainability: Matches material (titanium), brand (Ray-Ban), color (gray/gold), and shape (aviator/rectangle).

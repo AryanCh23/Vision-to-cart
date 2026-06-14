@@ -1,0 +1,14 @@
+Failed to find real location of C:\Program Files\PostgreSQL\16\pgAdmin 4\python\python.exe
+WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NameResolutionError("HTTPSConnection(host='pypi.org', port=443): Failed to resolve 'pypi.org' ([Errno 11001] getaddrinfo failed)")': /simple/pydantic/
+WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NameResolutionError("HTTPSConnection(host='pypi.org', port=443): Failed to resolve 'pypi.org' ([Errno 11001] getaddrinfo failed)")': /simple/pydantic/
+WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NameResolutionError("HTTPSConnection(host='pypi.org', port=443): Failed to resolve 'pypi.org' ([Errno 11001] getaddrinfo failed)")': /simple/pydantic/
+WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NameResolutionError("HTTPSConnection(host='pypi.org', port=443): Failed to resolve 'pypi.org' ([Errno 11001] getaddrinfo failed)")': /simple/pydantic/
+WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NameResolutionError("HTTPSConnection(host='pypi.org', port=443): Failed to resolve 'pypi.org' ([Errno 11001] getaddrinfo failed)")': /simple/pydantic/
+ERROR: Could not find a version that satisfies the requirement pydantic (from versions: none)
+ERROR: No matching distribution found for pydantic
+WARNING: Failed to remove contents in a temporary directory 'C:\Users\Admin\AppData\Local\Packages\ag-sandbox-wedkq7d3yoq5bph3xf4doisdu3\AC\Temp\pip-build-tracker-jbilueaj'.
+You can safely remove it manually.
+WARNING: Failed to remove contents in a temporary directory 'C:\Users\Admin\AppData\Local\Packages\ag-sandbox-wedkq7d3yoq5bph3xf4doisdu3\AC\Temp\pip-ephem-wheel-cache-b3z12wwp'.
+You can safely remove it manually.
+WARNING: Failed to remove contents in a temporary directory 'C:\Users\Admin\AppData\Local\Packages\ag-sandbox-wedkq7d3yoq5bph3xf4doisdu3\AC\Temp\pip-install-uree6jom'.
+You can safely remove it manually.
